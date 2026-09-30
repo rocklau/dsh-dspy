@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Current Harness integration > replaces only an explicit selected current-agent fragment and logs the exact request prompt 1`] = `
+"You are an AI agent powered by DeepSeek Harness.
+
+Original prefix
+
+Ground claims in the provided context and prefer concise, verifiable answers.
+
+Keep suffix"
+`;

@@ -1,0 +1,13 @@
+# Section hashes computed with the local Harness translation-pairing tooling.
+/:
+  en: dd20bd41ad094a85
+  zh: 6bb7a53ff2908770
+/upgrade-dsh-dspy-for-the-current-harness:
+  en: 43afc05b89ed3b51
+  zh: 9be82f8a7ea00be5
+/upgrade-dsh-dspy-for-the-current-harness/change:
+  en: e9a5f22111816d63
+  zh: 69ad778581997374
+/upgrade-dsh-dspy-for-the-current-harness/migration:
+  en: c37852f953f8cd77
+  zh: f3b8f2dae42fe89a

@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dsh_dspy"
+version = "0.1.0"
+description = "DSPy optimizer bridge for the dsh-dspy DeepSeek Harness plugin"
+requires-python = ">=3.10"
+dependencies = [
+    "dspy==3.4.0",
+    "openai>=2.0,<3.0",
+]
+
+[project.scripts]
+dsh-dspy-bridge = "dsh_dspy.bridge:main"
+
+[tool.setuptools.packages.find]
+include = ["dsh_dspy*"]

@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  HARNESS_REF: 639ed015397290b3745d163aafe02ffee4aa3f84
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: dsh-plugins/dsh-dspy
+      - uses: actions/checkout@v4
+        with:
+          repository: deepseek-ai/deepseek-harness
+          ref: ${{ env.HARNESS_REF }}
+          path: deepseek-harness
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.7.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: pnpm
+          cache-dependency-path: |
+            deepseek-harness/pnpm-lock.yaml
+            dsh-plugins/dsh-dspy/pnpm-lock.yaml
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build pinned Harness libraries
+        working-directory: deepseek-harness
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm build
+      - name: Install plugin dependencies and Python runtime
+        working-directory: dsh-plugins/dsh-dspy
+        run: |
+          pnpm install --frozen-lockfile --ignore-scripts
+          pnpm setup:python
+      - name: Check plugin and built runtime
+        working-directory: dsh-plugins/dsh-dspy
+        run: |
+          pnpm typecheck
+          pnpm test
+          node scripts/smoke-built.mjs
+          pnpm pack
+      - name: Python optimizer tests
+        working-directory: dsh-plugins/dsh-dspy/python
+        run: |
+          DSPY_CACHEDIR="$PWD/.cache" .venv/bin/python -m unittest discover -s tests -v

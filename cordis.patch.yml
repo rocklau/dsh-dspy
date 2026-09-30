@@ -1,0 +1,4 @@
+# Host insertion patch for installation through the Desktop Plugins page.
+- insert:
+    - id: dsh-dspy
+      name: dsh-dspy

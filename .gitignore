@@ -1,0 +1,11 @@
+node_modules/
+lib/
+.test-state/
+.smoke-state/
+python/.venv/
+python/.cache/
+__pycache__/
+*.tgz
+.env
+.env.*
+!.env.example
